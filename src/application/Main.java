@@ -29,7 +29,7 @@ public class Main {
             System.out.print("Price: ");
             double price = sc.nextDouble();
 
-
+            // TODO: separate if for usedProduct
             if (ch == 'c' || ch == 'u') {
                 Product products = new Product(name, price);
                 list.add(products);
