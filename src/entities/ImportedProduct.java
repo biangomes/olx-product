@@ -3,9 +3,9 @@ package entities;
 public class ImportedProduct extends Product {
     private Double customsFee;
 
-    public ImportedProduct() {
-        super();
-    }
+//    public ImportedProduct() {
+//        super();
+//    }
 
     public ImportedProduct(String name, Double price, Double customsFee) {
         super(name, price);
@@ -24,7 +24,8 @@ public class ImportedProduct extends Product {
         return getPrice() + customsFee;
     }
 
+    @Override
     public String priceTag() {
-        return " (Customs fee: $ " + String.format("%.2f", customsFee) + ")";
+        return getName() + " (Customs fee: $ " + String.format("%.2f", customsFee) + ")";
     }
 }

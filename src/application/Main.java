@@ -2,21 +2,21 @@ package application;
 
 import entities.ImportedProduct;
 import entities.Product;
+import entities.UsedProduct;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         List<Product> list = new ArrayList<Product>();
 
-        System.out.println("Enter the number of products: ");
+        System.out.print("Enter the number of products: ");
         int n = sc.nextInt();
 
         for (int i=0; i<n; i++) {
@@ -30,26 +30,28 @@ public class Main {
             double price = sc.nextDouble();
 
             // TODO: separate if for usedProduct
-            if (ch == 'c' || ch == 'u') {
-                Product products = new Product(name, price);
-                list.add(products);
+            if (ch == 'c') {
+                list.add(new Product(name, price));
             }
 
             // TODO: implement logic for UsedProduct
-            // ...
+            else if (ch == 'u') {
+                System.out.println("Manufacture date (DD/MM/YYYY): ");
+                Date manufactureDate = sdf.parse(sc.next());
+                list.add(new UsedProduct(name, price, manufactureDate));
+            }
 
-            if (ch == 'i') {
+            else {
                 System.out.print("Customs fee: ");
                 double customsFee = sc.nextDouble();
-                Product products = new ImportedProduct(name, price, customsFee);
-                list.add(products);
+                list.add(new ImportedProduct(name, price, customsFee));
             }
         }
 
         System.out.println("PRICE TAGS: ");
         // TODO: fix output, it's not displaying the name of product
         for (Product products : list) {
-            System.out.println(products.getName() + products.priceTag());
+            System.out.println(products.priceTag());
         }
 
 
